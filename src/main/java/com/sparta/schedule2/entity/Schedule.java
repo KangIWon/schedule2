@@ -1,40 +1,36 @@
 package com.sparta.schedule2.entity;
 
-import com.sparta.schedule2.dto.ScheduleRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Setter
 @Table(name = "schedules")
 @NoArgsConstructor
 public class Schedule {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String username;
     private String title;
     private String description;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
-    public Schedule(ScheduleRequestDto requestDto) {
-        this.username = requestDto.getUsername();
-        this.title = requestDto.getTitle();
-        this.description = requestDto.getDescription();
+    public Schedule(String username, String title, String description) {
+        this.username = username;
+        this.title = title;
+        this.description = description;
         this.createdDate = LocalDateTime.now();
-        this.createdDate = LocalDateTime.now();
+        this.modifiedDate = LocalDateTime.now();
     }
 
-    public void update(ScheduleRequestDto requestDto) {
-        this.username = requestDto.getUsername();
-        this.title = requestDto.getTitle();
-        this.description = requestDto.getDescription();
+    public void update(String username, String title, String description) {
+        this.username = username;
+        this.title = title;
+        this.description = description;
         this.modifiedDate = LocalDateTime.now();
     }
 }

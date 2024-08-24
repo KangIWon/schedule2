@@ -1,39 +1,43 @@
 package com.sparta.schedule2.service;
 
+import com.sparta.schedule2.dto.*;
 import com.sparta.schedule2.dto.ScheduleRequestDto;
 import com.sparta.schedule2.dto.ScheduleResponseDto;
 import com.sparta.schedule2.entity.Schedule;
 import com.sparta.schedule2.repository.ScheduleRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@RequiredArgsConstructor
 public class ScheduleService {
     private final ScheduleRepository scheduleRepository;
-    public ScheduleService(ScheduleRepository scheduleRepository) {
-        this.scheduleRepository = scheduleRepository;
+
+    @Transactional
+    public ScheduleSaveResponseDto saveSchedule(ScheduleSaveRequestDto requestDto) {
+        Schedule newSchedule = new Schedule(requestDto.getUsername(), requestDto.getTitle(), requestDto.getDescription());
+        Schedule savedSchedule = scheduleRepository.save(newSchedule);
+
+        return new ScheduleSaveResponseDto(savedSchedule.getId(),
+                savedSchedule.getUsername(),
+                savedSchedule.getTitle(),
+                savedSchedule.getDescription(), savedSchedule.getCreatedDate(), savedSchedule.getModifiedDate());
     }
 
-    public ScheduleResponseDto saveSchedule(ScheduleRequestDto requestDto) {
-        Schedule schedule = new Schedule(requestDto);
-
-        Schedule savedSchedule = scheduleRepository.save(schedule);
-
-        ScheduleResponseDto scheduleResponseDto = new ScheduleResponseDto(savedSchedule);
-
-        return scheduleResponseDto;
+    public ScheduleDetailResponseDto getSchedule(Long scheduleId) {
+        Schedule schedule = scheduleRepository.findById(scheduleId)
+                .orElseThrow(() -> new NullPointerException("해당 ID를 가진 할일이 존재하지 않습니다."));
+        return new ScheduleDetailResponseDto(schedule.getId(), schedule.getUsername(), schedule.getTitle(),
+                schedule.getDescription(), schedule.getCreatedDate(), schedule.getModifiedDate());
     }
 
-    public ScheduleResponseDto getSchedule(Long id) {
-        Schedule schedule = scheduleRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 ID를 가진 할일이 존재하지 않습니다."));
-        return new ScheduleResponseDto(schedule);
-    }
-
-    public ScheduleResponseDto updateSchedule(Long id, ScheduleRequestDto requestDto) {
-        Schedule schedule = scheduleRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 ID를 가진 할일이 존재하지 않습니다."));
-        schedule.update(requestDto);
-        Schedule updatedSchedule = scheduleRepository.save(schedule);
-        return new ScheduleResponseDto(updatedSchedule);
+    @Transactional
+    public ScheduleUpdateResponseDto updateSchedule(Long scheduleId, ScheduleUpdateRequestDto requestDto) {
+        Schedule schedule = scheduleRepository.findById(scheduleId)
+                .orElseThrow(() -> new NullPointerException("해당 ID를 가진 할일이 존재하지 않습니다."));
+        schedule.update(requestDto.getUsername(), requestDto.getTitle(), requestDto.getDescription());
+        return new ScheduleUpdateResponseDto(schedule.getId(), schedule.getUsername(), schedule.getTitle(),
+                schedule.getDescription(), schedule.getCreatedDate(), schedule.getModifiedDate());
     }
 }

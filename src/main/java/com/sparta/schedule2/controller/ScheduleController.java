@@ -1,30 +1,29 @@
 package com.sparta.schedule2.controller;
 
-import com.sparta.schedule2.dto.ScheduleRequestDto;
-import com.sparta.schedule2.dto.ScheduleResponseDto;
+import com.sparta.schedule2.dto.*;
 import com.sparta.schedule2.service.ScheduleService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/schedule")
 public class ScheduleController {
     private final ScheduleService scheduleService;
-    public ScheduleController(ScheduleService scheduleService) {
-        this.scheduleService = scheduleService;
-    }
 
     @PostMapping
-    public ScheduleResponseDto createSchedule(@RequestBody ScheduleRequestDto requestDto) {
-        return scheduleService.saveSchedule(requestDto);
+    public ResponseEntity<ScheduleSaveResponseDto> saveSchedule(@RequestBody ScheduleSaveRequestDto requestDto) {
+        return ResponseEntity.ok(scheduleService.saveSchedule(requestDto));
     }
 
-    @GetMapping("/{id}")
-    public ScheduleResponseDto getSchedule(@PathVariable long id) {
-        return scheduleService.getSchedule(id);
+    @GetMapping("/{scheduleId}")
+    public ResponseEntity<ScheduleDetailResponseDto> getSchedule(@PathVariable long suchduleId) {
+        return ResponseEntity.ok(scheduleService.getSchedule(suchduleId));
     }
 
-    @PutMapping("/{id}")
-    public ScheduleResponseDto updateSchedule(@PathVariable Long id, @RequestBody ScheduleRequestDto requestDto) {
-        return scheduleService.updateSchedule(id, requestDto);
+    @PutMapping("/{scheduleId}")
+    public ResponseEntity<ScheduleUpdateResponseDto> updateSchedule(@PathVariable Long scheduleId, @RequestBody ScheduleUpdateRequestDto requestDto) {
+        return ResponseEntity.ok(scheduleService.updateSchedule(scheduleId, requestDto));
     }
 }
