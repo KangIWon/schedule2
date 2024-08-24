@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/schedule")
+@RequestMapping("/api/schedules")
 public class ScheduleController {
     private final ScheduleService scheduleService;
 
@@ -18,8 +18,8 @@ public class ScheduleController {
     }
 
     @GetMapping("/{scheduleId}")
-    public ResponseEntity<ScheduleDetailResponseDto> getSchedule(@PathVariable long suchduleId) {
-        return ResponseEntity.ok(scheduleService.getSchedule(suchduleId));
+    public ResponseEntity<ScheduleDetailResponseDto> getSchedule(@PathVariable Long scheduleId) {
+        return ResponseEntity.ok(scheduleService.getSchedule(scheduleId));
     }
 
     @PutMapping("/{scheduleId}")

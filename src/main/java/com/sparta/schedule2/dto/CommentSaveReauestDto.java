@@ -5,7 +5,7 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 
 @Getter
-public class ScheduleSaveRequestDto {
+public class CommentSaveReauestDto {
     private String username;
     private String title;
     private String description;
