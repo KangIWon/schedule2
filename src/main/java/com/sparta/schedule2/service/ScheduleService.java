@@ -1,8 +1,6 @@
 package com.sparta.schedule2.service;
 
 import com.sparta.schedule2.dto.*;
-import com.sparta.schedule2.dto.ScheduleRequestDto;
-import com.sparta.schedule2.dto.ScheduleResponseDto;
 import com.sparta.schedule2.entity.Schedule;
 import com.sparta.schedule2.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
