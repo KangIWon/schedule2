@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -16,6 +18,8 @@ public class Schedule {
     private String username;
     private String title;
     private String description;
+    @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Comment> comments = new ArrayList<>();
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
@@ -32,5 +36,14 @@ public class Schedule {
         this.title = title;
         this.description = description;
         this.modifiedDate = LocalDateTime.now();
+    }
+    public void addComment(Comment comment) {
+        comments.add(comment);
+        comment.setSchedule(this);
+    }
+
+    public void removeComment(Comment comment) {
+        comments.remove(comment);
+        comment.setSchedule(null);
     }
 }

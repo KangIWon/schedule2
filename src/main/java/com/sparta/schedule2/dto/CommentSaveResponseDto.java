@@ -5,18 +5,18 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 
 @Getter
-public class CommentSaveRepository {
+public class CommentSaveResponseDto {
     private final Long id;
+    private final String username;
     private final String description;
     private final LocalDateTime createdDate;
     private final LocalDateTime modifiedDate;
-    private final String username;
 
-    public CommentSaveRepository(Long id, String description, LocalDateTime createdDate, LocalDateTime modifiedDate, String username) {
+    public CommentSaveResponseDto(Long id, String username, String description, LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.id = id;
+        this.username = username;
         this.description = description;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
-        this.username = username;
     }
 }

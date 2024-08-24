@@ -17,15 +17,15 @@ public class ScheduleService {
         Schedule newSchedule = new Schedule(requestDto.getUsername(), requestDto.getTitle(), requestDto.getDescription());
         Schedule savedSchedule = scheduleRepository.save(newSchedule);
 
-        return new ScheduleSaveResponseDto(savedSchedule.getId(),
-                savedSchedule.getUsername(),
-                savedSchedule.getTitle(),
-                savedSchedule.getDescription(), savedSchedule.getCreatedDate(), savedSchedule.getModifiedDate());
+        return new ScheduleSaveResponseDto(savedSchedule.getId(), savedSchedule.getUsername(),
+                savedSchedule.getTitle(), savedSchedule.getDescription(),
+                savedSchedule.getCreatedDate(), savedSchedule.getModifiedDate());
     }
 
     public ScheduleDetailResponseDto getSchedule(Long scheduleId) {
         Schedule schedule = scheduleRepository.findById(scheduleId)
                 .orElseThrow(() -> new NullPointerException("해당 ID를 가진 할일이 존재하지 않습니다."));
+
         return new ScheduleDetailResponseDto(schedule.getId(), schedule.getUsername(), schedule.getTitle(),
                 schedule.getDescription(), schedule.getCreatedDate(), schedule.getModifiedDate());
     }
@@ -34,8 +34,9 @@ public class ScheduleService {
     public ScheduleUpdateResponseDto updateSchedule(Long scheduleId, ScheduleUpdateRequestDto requestDto) {
         Schedule schedule = scheduleRepository.findById(scheduleId)
                 .orElseThrow(() -> new NullPointerException("해당 ID를 가진 할일이 존재하지 않습니다."));
+
         schedule.update(requestDto.getUsername(), requestDto.getTitle(), requestDto.getDescription());
-        return new ScheduleUpdateResponseDto(schedule.getId(), schedule.getUsername(), schedule.getTitle(),
-                schedule.getDescription(), schedule.getCreatedDate(), schedule.getModifiedDate());
+        return new ScheduleUpdateResponseDto(schedule.getId(), schedule.getUsername(),
+                schedule.getTitle(), schedule.getDescription(), schedule.getCreatedDate(), schedule.getModifiedDate());
     }
 }

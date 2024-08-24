@@ -5,8 +5,8 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 
 @Getter
-public class CommentSaveReauestDto {
+public class CommentSaveRequestDto {
     private String username;
-    private String title;
     private String description;
+    private Long scheduleId;
 }
