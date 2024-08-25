@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Getter
 public class SchedulePageResponseDto {
-    private String user;
+//    private String user;
     private String title;
     private String description;
     private int commentCount;
@@ -26,7 +26,7 @@ public class SchedulePageResponseDto {
 
     public static SchedulePageResponseDto from(Schedule schedule) {
         SchedulePageResponseDto dto = new SchedulePageResponseDto();
-        dto.user = schedule.getUser().getUsername();
+//        dto.user = schedule.getUser().getUsername();
         dto.title = schedule.getTitle();
         dto.description = schedule.getDescription();
         dto.commentCount = schedule.getComments().size();
