@@ -18,6 +18,7 @@ public class Schedule {
     private String username;
     private String title;
     private String description;
+
     @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Comment> comments = new ArrayList<>();
     private LocalDateTime createdDate;

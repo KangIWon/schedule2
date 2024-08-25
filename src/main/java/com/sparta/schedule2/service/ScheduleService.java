@@ -52,4 +52,11 @@ public class ScheduleService {
                 .map(SchedulePageResponseDto::from);
         return page.getContent();
     }
+
+    @Transactional
+    public void deleteSchedule(Long scheduleId) {
+        Schedule schedule = scheduleRepository.findById(scheduleId)
+                .orElseThrow(() -> new NullPointerException("해당 ID를 가진 할일이 존재하지 않습니다."));
+        scheduleRepository.delete(schedule);
+    }
 }

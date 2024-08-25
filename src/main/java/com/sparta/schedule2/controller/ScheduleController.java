@@ -36,4 +36,8 @@ public class ScheduleController {
         return ResponseEntity.ok(scheduleService.getSchedules(pageNo, pageSize));
     }
 
+    @DeleteMapping("/{scheduleId}")
+    public void deleteSchedule(@PathVariable Long scheduleId) {
+        scheduleService.deleteSchedule(scheduleId);
+    }
 }
