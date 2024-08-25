@@ -59,7 +59,7 @@ public class CommentService {
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new NullPointerException("해당 ID를 가진 댓글이 존재하지 않습니다."));
 
-        comment.update(requestDto.getDescription(), requestDto.getUsername());
+        comment.update(requestDto.getUsername(), requestDto.getDescription());
         return new CommentUpdateResponseDto(comment.getId(), comment.getUsername(), comment.getDescription(),
                 comment.getCreatedDate(), comment.getModifiedDate());
     }
