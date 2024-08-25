@@ -16,8 +16,8 @@ public class Comment {
     private Long id;
     private String username;
     private String description;
-    @ManyToOne
-    @JoinColumn(name = "schedule_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "schedule_id", nullable = false)
     private Schedule schedule;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;

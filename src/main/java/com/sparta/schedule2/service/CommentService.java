@@ -25,6 +25,9 @@ public class CommentService {
                 .orElseThrow(() -> new NullPointerException("해당 ID를 가진 스케줄이 존재하지 않습니다."));
 
         Comment newComment = new Comment(requestDto.getUsername(), requestDto.getDescription(), schedule);
+//
+//        schedule.addComment(newComment);
+//
         Comment savedComment = commentRepository.save(newComment);
 
         return new CommentSaveResponseDto(savedComment.getId(), savedComment.getUsername(), savedComment.getDescription(),
