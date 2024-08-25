@@ -1,13 +1,14 @@
 package com.sparta.schedule2.dto;
 
 import com.sparta.schedule2.entity.Schedule;
+import com.sparta.schedule2.entity.User;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Getter
 public class SchedulePageResponseDto {
-    private String username;
+    private String user;
     private String title;
     private String description;
     private int commentCount;
@@ -25,7 +26,7 @@ public class SchedulePageResponseDto {
 
     public static SchedulePageResponseDto from(Schedule schedule) {
         SchedulePageResponseDto dto = new SchedulePageResponseDto();
-        dto.username = schedule.getUsername();
+        dto.user = schedule.getUser().getUsername();
         dto.title = schedule.getTitle();
         dto.description = schedule.getDescription();
         dto.commentCount = schedule.getComments().size();

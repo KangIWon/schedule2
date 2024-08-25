@@ -1,12 +1,12 @@
 package com.sparta.schedule2.dto;
 
+import com.sparta.schedule2.entity.User;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
 
 @Getter
 public class ScheduleSaveRequestDto {
-    private String username;
+    private Long userId;
     private String title;
     private String description;
 }

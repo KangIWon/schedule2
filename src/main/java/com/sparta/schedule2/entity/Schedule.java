@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -15,7 +17,13 @@ import java.util.List;
 public class Schedule {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String username;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+    @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<UserSchedule> userSchedules = new HashSet<>();
+
     private String title;
     private String description;
 
@@ -24,16 +32,15 @@ public class Schedule {
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
-    public Schedule(String username, String title, String description) {
-        this.username = username;
+    public Schedule(User user, String title, String description) {
+        this.user = user;
         this.title = title;
         this.description = description;
         this.createdDate = LocalDateTime.now();
         this.modifiedDate = LocalDateTime.now();
     }
 
-    public void update(String username, String title, String description) {
-        this.username = username;
+    public void update(String title, String description) {
         this.title = title;
         this.description = description;
         this.modifiedDate = LocalDateTime.now();
