@@ -6,6 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/schedules")
@@ -26,4 +29,11 @@ public class ScheduleController {
     public ResponseEntity<ScheduleUpdateResponseDto> updateSchedule(@PathVariable Long scheduleId, @RequestBody ScheduleUpdateRequestDto requestDto) {
         return ResponseEntity.ok(scheduleService.updateSchedule(scheduleId, requestDto));
     }
+
+    @GetMapping
+    public ResponseEntity<List<SchedulePageResponseDto>> getSchedules(@RequestParam(defaultValue = "0") int pageNo,
+                                                                      @RequestParam(defaultValue = "10") int pageSize) {
+        return ResponseEntity.ok(scheduleService.getSchedules(pageNo, pageSize));
+    }
+
 }
