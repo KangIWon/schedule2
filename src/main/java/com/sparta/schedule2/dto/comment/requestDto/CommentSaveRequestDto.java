@@ -1,9 +1,9 @@
-package com.sparta.schedule2.dto;
+package com.sparta.schedule2.dto.comment.requestDto;
 
 import lombok.Getter;
 
 @Getter
-public class CommentUpdateRequestDto {
+public class CommentSaveRequestDto {
     private Long scheduleId;
     private String username;
     private String description;

@@ -1,17 +1,18 @@
-package com.sparta.schedule2.dto;
+package com.sparta.schedule2.dto.comment.responseDto;
 
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+
 @Getter
-public class CommentDetailResponseDto {
+public class CommentSaveResponseDto {
     private final Long id;
     private final String username;
     private final String description;
     private final LocalDateTime createdDate;
     private final LocalDateTime modifiedDate;
 
-    public CommentDetailResponseDto(Long id, String username, String description, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+    public CommentSaveResponseDto(Long id, String username, String description, LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.id = id;
         this.username = username;
         this.description = description;

@@ -1,6 +1,8 @@
 package com.sparta.schedule2.service;
 
-import com.sparta.schedule2.dto.*;
+import com.sparta.schedule2.dto.user.requestDto.UserSaveRequestDto;
+import com.sparta.schedule2.dto.user.requestDto.UserUpdateRequestDto;
+import com.sparta.schedule2.dto.user.responseDto.*;
 import com.sparta.schedule2.entity.Schedule;
 import com.sparta.schedule2.entity.User;
 import com.sparta.schedule2.entity.UserSchedule;
@@ -62,7 +64,7 @@ public class UserService {
     }
 
     @Transactional
-    public void addScheduleToUser(Long userId, Long scheduleId) {
+    public UserAddResponseDto addScheduleToUser(Long userId, Long scheduleId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("해당 ID를 가진 유저가 존재하지 않습니다."));
         Schedule schedule = scheduleRepository.findById(scheduleId)
@@ -70,6 +72,7 @@ public class UserService {
 
         UserSchedule userSchedule = new UserSchedule(user, schedule);
         userScheduleRepository.save(userSchedule);
+        return new UserAddResponseDto(user.getUsername(), schedule.getTitle());
     }
 
     @Transactional

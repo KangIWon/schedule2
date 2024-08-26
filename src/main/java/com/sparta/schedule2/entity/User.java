@@ -20,7 +20,7 @@ public class User {
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<UserSchedule> userSchedules = new HashSet<>();
 
     public User(String username, String email) {

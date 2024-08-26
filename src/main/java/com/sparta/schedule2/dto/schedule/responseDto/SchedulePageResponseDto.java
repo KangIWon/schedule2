@@ -1,4 +1,4 @@
-package com.sparta.schedule2.dto;
+package com.sparta.schedule2.dto.schedule.responseDto;
 
 import com.sparta.schedule2.entity.Schedule;
 

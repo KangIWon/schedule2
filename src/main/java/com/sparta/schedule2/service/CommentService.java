@@ -1,6 +1,11 @@
 package com.sparta.schedule2.service;
 
-import com.sparta.schedule2.dto.*;
+import com.sparta.schedule2.dto.comment.requestDto.CommentSaveRequestDto;
+import com.sparta.schedule2.dto.comment.requestDto.CommentUpdateRequestDto;
+import com.sparta.schedule2.dto.comment.responseDto.CommentDetailResponseDto;
+import com.sparta.schedule2.dto.comment.responseDto.CommentSaveResponseDto;
+import com.sparta.schedule2.dto.comment.responseDto.CommentSimpleResponseDto;
+import com.sparta.schedule2.dto.comment.responseDto.CommentUpdateResponseDto;
 import com.sparta.schedule2.entity.Comment;
 import com.sparta.schedule2.entity.Schedule;
 import com.sparta.schedule2.repository.CommentRepository;

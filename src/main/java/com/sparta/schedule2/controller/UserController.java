@@ -1,6 +1,8 @@
 package com.sparta.schedule2.controller;
 
-import com.sparta.schedule2.dto.*;
+import com.sparta.schedule2.dto.user.requestDto.UserSaveRequestDto;
+import com.sparta.schedule2.dto.user.requestDto.UserUpdateRequestDto;
+import com.sparta.schedule2.dto.user.responseDto.*;
 import com.sparta.schedule2.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -41,8 +43,8 @@ public class UserController {
     }
 
     @PostMapping("/{userId}/schedules/{scheduleId}")
-    public void addScheduleToUser(@PathVariable Long userId, @PathVariable Long scheduleId) {
-        userService.addScheduleToUser(userId, scheduleId);
+    public ResponseEntity<UserAddResponseDto> addScheduleToUser(@PathVariable Long userId, @PathVariable Long scheduleId) {
+        return ResponseEntity.ok(userService.addScheduleToUser(userId, scheduleId));
     }
 
     @DeleteMapping("/{userId}/schedules/{scheduleId}")

@@ -1,4 +1,4 @@
-package com.sparta.schedule2.dto;
+package com.sparta.schedule2.dto.user.requestDto;
 
 import lombok.Getter;
 
