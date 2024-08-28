@@ -14,23 +14,26 @@ import java.util.Set;
 @Getter
 @Table(name = "schedules")
 @NoArgsConstructor
-public class Schedule {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Schedule extends Timestamped {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
     @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Set<UserSchedule> userSchedules = new HashSet<>();
+    private Set<UserSchedule> assignees = new HashSet<>();
 
     private String title;
     private String description;
+    
+    private LocalDateTime createdDate;
+    private LocalDateTime modifiedDate;
 
     @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Comment> comments = new ArrayList<>();
-    private LocalDateTime createdDate;
-    private LocalDateTime modifiedDate;
 
     public Schedule(User user, String title, String description) {
         this.user = user;
@@ -45,13 +48,20 @@ public class Schedule {
         this.description = description;
         this.modifiedDate = LocalDateTime.now();
     }
-    public void addComment(Comment comment) {
-        comments.add(comment);
-        comment.setSchedule(this);
+
+//    public void addAssignedUser(User user) {
+//        UserSchedule assignee = new UserSchedule(user, this);
+//        this.assignees.add(assignee);
+//        if (!user.getUserSchedules().contains(assignee)) {
+//            user.addAssignedSchedule(assignee);
+//        }
+//    }
+
+    public List<User> getAssignedUsers() {
+        return assignees.stream().map(UserSchedule::getUser).toList();
     }
 
-    public void removeComment(Comment comment) {
-        comments.remove(comment);
-        comment.setSchedule(null);
+    public void removeAssignedUser(User user) {
+        assignees.removeIf(assignee -> assignee.getUser().equals(user) && assignee.getSchedule().equals(this));
     }
 }

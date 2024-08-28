@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -24,8 +25,8 @@ public class UserService {
 
     @Transactional
     public UserSaveResponseDto saveUser(UserSaveRequestDto requestDto) {
-        User user = new User(requestDto.getUsername(), requestDto.getEmail());
-        User savedUser = userRepository.save(user);
+        User newUser = new User(requestDto.getUsername(), requestDto.getEmail());
+        User savedUser = userRepository.save(newUser);
         return new UserSaveResponseDto(savedUser.getId(), savedUser.getUsername(), savedUser.getEmail(),
                 savedUser.getCreatedDate(), savedUser.getModifiedDate());
     }
@@ -77,14 +78,10 @@ public class UserService {
 
     @Transactional
     public void removeScheduleFromUser(Long userId, Long scheduleId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("해당 ID를 가진 유저가 존재하지 않습니다."));
-        Schedule schedule = scheduleRepository.findById(scheduleId)
-                .orElseThrow(() -> new RuntimeException("해당 ID를 가진 일정이 존재하지 않습니다."));
+        User user = userRepository.findById(userId).orElseThrow(() -> new NoSuchElementException("해당 ID를 가진 유저가 존재하지 않습니다."));
+        Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow(() -> new NoSuchElementException("해당 ID를 가진 일정이 존재하지 않습니다."));
 
-        UserSchedule userSchedule = userScheduleRepository.findByUserAndSchedule(user, schedule)
-                .orElseThrow(() -> new RuntimeException("유저와 일정 간의 관계가 존재하지 않습니다."));
-
-        userScheduleRepository.delete(userSchedule);
+        user.removeAssignedSchedule(schedule);
+        schedule.removeAssignedUser(user);
     }
 }
