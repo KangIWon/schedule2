@@ -15,15 +15,6 @@ public class SchedulePageResponseDto {
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
-//    public SchedulePageResponseDto (String username, String title, String description, Schedule schedule, LocalDateTime createdDate, LocalDateTime modifiedDate) {
-//        this.username = username;
-//        this.title = title;
-//        this.description = description;
-//        this.commentCount = schedule.getComments().size();
-//        this.createdDate = createdDate;
-//        this.modifiedDate = modifiedDate;
-//    }
-
     public static SchedulePageResponseDto from(Schedule schedule) {
         SchedulePageResponseDto dto = new SchedulePageResponseDto();
 //        dto.user = schedule.getUser().getUsername();

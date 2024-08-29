@@ -2,14 +2,11 @@ package com.sparta.schedule2.dto.schedule.responseDto;
 
 import com.sparta.schedule2.dto.userschedule.UserScheduleResponseDto;
 import com.sparta.schedule2.entity.Schedule;
-import com.sparta.schedule2.entity.User;
-import com.sparta.schedule2.entity.UserSchedule;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Setter
 @Getter

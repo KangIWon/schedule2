@@ -8,7 +8,6 @@ import com.sparta.schedule2.dto.schedule.responseDto.ScheduleSaveResponseDto;
 import com.sparta.schedule2.dto.schedule.responseDto.ScheduleUpdateResponseDto;
 import com.sparta.schedule2.entity.Schedule;
 import com.sparta.schedule2.entity.User;
-import com.sparta.schedule2.entity.UserSchedule;
 import com.sparta.schedule2.repository.ScheduleRepository;
 import com.sparta.schedule2.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -46,7 +45,6 @@ public class ScheduleService {
 
         return responseDto;
     }
-
 
 
     @Transactional

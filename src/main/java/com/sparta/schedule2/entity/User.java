@@ -32,9 +32,9 @@ public class User extends Timestamped {
         this.email = email;
     }
 
-    public void addAssignedSchedule(UserSchedule userSchedule) {
-        this.userSchedules.add(userSchedule);
-    }
+//    public void addAssignedSchedule(UserSchedule userSchedule) {
+//        this.userSchedules.add(userSchedule);
+//    }
 
     public void removeAssignedSchedule(Schedule schedule) {
         userSchedules.removeIf(userSchedule -> userSchedule.getSchedule().equals(schedule));
