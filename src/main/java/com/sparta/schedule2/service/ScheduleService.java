@@ -6,6 +6,7 @@ import com.sparta.schedule2.dto.schedule.responseDto.ScheduleDetailResponseDto;
 import com.sparta.schedule2.dto.schedule.responseDto.SchedulePageResponseDto;
 import com.sparta.schedule2.dto.schedule.responseDto.ScheduleSaveResponseDto;
 import com.sparta.schedule2.dto.schedule.responseDto.ScheduleUpdateResponseDto;
+import com.sparta.schedule2.dto.userschedule.UserScheduleResponseDto;
 import com.sparta.schedule2.entity.Schedule;
 import com.sparta.schedule2.entity.User;
 import com.sparta.schedule2.repository.ScheduleRepository;

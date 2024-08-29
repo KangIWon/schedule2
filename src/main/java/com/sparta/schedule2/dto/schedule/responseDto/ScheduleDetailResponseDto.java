@@ -17,6 +17,7 @@ public class ScheduleDetailResponseDto {
     private final String description;
     private final LocalDateTime createdDate;
     private final LocalDateTime modifiedDate;
+    private List<UserScheduleResponseDto> usersSchedule;
 
     public ScheduleDetailResponseDto(Schedule schedule) {
         this.id = schedule.getId();
